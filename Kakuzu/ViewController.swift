@@ -27,18 +27,24 @@ class ViewController: UIViewController {
     }
 
     // buttons actions
+    //https://stackoverflow.com/questions/38534573/changing-opacity-of-button-when-clicked-xcode-swift
     @IBAction func buttonClicked(_ sender: UIButton) {
+        
         // set background color to white
+        //https://stackoverflow.com/questions/24427284/change-button-background-color-using-swift-language
         sender.backgroundColor = UIColor.white
+        
         // dynamically set the button text to the number in the array at that position
+        //https://stackoverflow.com/questions/26326296/changing-text-of-uibutton-programmatically-swift
         sender.setTitle(firstTile, for: UIControl.State.normal)
         
         // select a random number that the user needs to guess correct square
+        //https://stackoverflow.com/questions/24007129/how-to-generate-a-random-number-in-swift
         // TODO: implement a separate method and button to display number
         randomGuess = Int.random(in: 0..<9)
         
         // if user guessed correctly, remove cover and display number
-        // TODO: add points to the player who guessed correctly
+        // TODO: add points to each player who guesses correctly
         if randomGuess == 1 {
             sender.backgroundColor = UIColor.white
         } else {
