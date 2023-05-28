@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     // players
     var player1 = "Player 1"
     var player2 = "Player 2"
@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     var player2_score = 0
     
     // tile 1 test
-    let randomGuess = Int.random(in: 0..<6)
+    var randomGuess = 0
     var firstTile: String = "1"
     
     override func viewDidLoad() {
@@ -28,39 +28,27 @@ class ViewController: UIViewController {
 
     // buttons actions
     @IBAction func buttonClicked(_ sender: UIButton) {
+        // set background color to white
+        sender.backgroundColor = UIColor.white
+        // dynamically set the button text to the number in the array at that position
+        sender.setTitle(firstTile, for: UIControl.State.normal)
         
-        sender.alpha = 0.0
+        // select a random number that the user needs to guess correct square
+        // TODO: implement a separate method and button to display number
+        randomGuess = Int.random(in: 0..<9)
         
-        self.displayNumber()
-        
-        // delay by 0.2 seconds, then cover number if guess incorrect
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2){
-            sender.alpha = 1.0
-        }
-        
-//        if randomNumber == numberOnBoard:
-//                player1Score += 1
-//
-//        else:
-//                sender.alpha = 1.0
-//                nextPlayerTurn
-        
-        
-        
-    }
-    
-    
-    
-    func displayNumber() -> View {
-        Group {
-            if randomGuess == 1 {
-                VStack {
-                        Text(firstTile)
-                    }
-                }
+        // if user guessed correctly, remove cover and display number
+        // TODO: add points to the player who guessed correctly
+        if randomGuess == 1 {
+            sender.backgroundColor = UIColor.white
+        } else {
+            // delay by 1 second, then cover number if guess incorrect
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
+                sender.backgroundColor = UIColor.black
+                sender.setTitle("", for: UIControl.State.normal)
+            }
         }
     }
     
-
 }
 
