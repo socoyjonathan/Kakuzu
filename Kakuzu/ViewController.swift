@@ -99,8 +99,8 @@ class ViewController: UIViewController {
         let r = Int(3 * floor(Float(x) / 3))
         let c = Int(3 * floor(Float(y) / 3))
         
-        for i in 1...3 {
-            for j in 1...3 {
+        for i in 0...2 {
+            for j in 0...2 {
                 if (board[r+i][c+j] == val){
                     return true
                 }
@@ -116,23 +116,31 @@ class ViewController: UIViewController {
         var count = 0
         var r = 0
         
+        var redo = false
+        
         while (r < 9) {
             print(r)
             var numbers = [1,2,3,4,5,6,7,8,9]
             var c = 0
             
+            if (redo){
+                redo = false
+            }
+            
             while (c < 9) {
                 
                 if (count >= 20) {
+                    print("count >= 20")
+                    print(r)
                     board[r] = [0,0,0,0,0,0,0,0,0]
-                    r = r - 1
-                    count = 0
-                    continue
+                    //r = r - 1
+                    redo = true
                 }
+                
                 count = 0
                 
                 
-                while (count < 20) {
+                while (!redo && count < 20) {
                     
                     let val = numbers.randomElement()!
                     let col = [board[0][c],board[1][c],board[2][c],
