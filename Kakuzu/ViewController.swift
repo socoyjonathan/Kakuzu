@@ -34,11 +34,14 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fillBoard()
+        print(board)
+        populateBoard()
+        print(board)
+        //fillBoard()
         // Do any additional setup after loading the view.
     }
 
-    /*
+    
     // buttons actions
     //https://stackoverflow.com/questions/38534573/changing-opacity-of-button-when-clicked-xcode-swift
     @IBAction func buttonClicked(_ sender: UIButton) {
@@ -49,7 +52,7 @@ class ViewController: UIViewController {
         
         // dynamically set the button text to the number in the array at that position
         //https://stackoverflow.com/questions/26326296/changing-text-of-uibutton-programmatically-swift
-        sender.setTitle(firstTile, for: UIControl.State.normal)
+        //sender.setTitle(firstTile, for: UIControl.State.normal)
         
         // select a random number that the user needs to guess correct square
         //https://stackoverflow.com/questions/24007129/how-to-generate-a-random-number-in-swift
@@ -58,16 +61,16 @@ class ViewController: UIViewController {
         
         // if user guessed correctly, remove cover and display number
         // TODO: add points to each player who guesses correctly
-        if randomGuess == 1 {
+        if randomGuess == 0 {
             sender.backgroundColor = UIColor.white
         } else {
             // delay by 1 second, then cover number if guess incorrect
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
                 sender.backgroundColor = UIColor.black
-                sender.setTitle("", for: UIControl.State.normal)
+                //sender.setTitle("", for: UIControl.State.normal)
             }
         }
-    }*/
+    }
     
     func fillBoard() {
         
@@ -79,12 +82,12 @@ class ViewController: UIViewController {
                 for element in layer2.subviews {
                     if element is UIButton {
                         let button = element as! UIButton
-                        var val = board[list] [index]
+                        let val = board[list][index]
                         button.setTitle(String(val), for: UIControl.State.normal)
-                        button.backgroundColor = UIColor.red
                     }
                     index = index + 1
                 }
+                index = 0
                 list = list + 1
             }
         }
@@ -98,17 +101,43 @@ class ViewController: UIViewController {
         var r = 0
         
         while (r < 9) {
-            let numbers = [1,2,3,4,5,6,7,8,9]
-            let c = 0
+            print(r)
+            var numbers = [1,2,3,4,5,6,7,8,9]
+            var c = 0
             
             while (c < 9) {
+                
+                if (count >= 20) {
+                    board[r] = [0,0,0,0,0,0,0,0,0]
+                    r = r - 1
+                    count = 0
+                    continue
+                }
+                count = 0
                 
                 
                 while (count < 20) {
                     
-                    var val = numbers.randomElement()!
+                    let val = numbers.randomElement()!
+                    let col = [board[0][c],board[1][c],board[2][c],
+                               board[3][c],board[4][c],board[5][c],
+                               board[6][c],board[7][c],board[8][c]]
+                    
+                    let in_col = col.contains(val)
+                    if (!in_col){
+                        board[r][c] = val
+                        let index = numbers.firstIndex(of: val)
+                        numbers.remove(at: index!)
+                        break
+                        
+                        
+                    }
+                    count = count + 1
+            
                 }
+                c = c + 1
             }
+            r = r + 1
             
         }
     }
