@@ -9,6 +9,17 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    
+    var board = [[0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0]]
+    
     // players
     var player1 = "Player 1"
     var player2 = "Player 2"
@@ -23,9 +34,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fillBoard()
         // Do any additional setup after loading the view.
     }
 
+    /*
     // buttons actions
     //https://stackoverflow.com/questions/38534573/changing-opacity-of-button-when-clicked-xcode-swift
     @IBAction func buttonClicked(_ sender: UIButton) {
@@ -53,6 +66,50 @@ class ViewController: UIViewController {
                 sender.backgroundColor = UIColor.black
                 sender.setTitle("", for: UIControl.State.normal)
             }
+        }
+    }*/
+    
+    func fillBoard() {
+        
+        var list = 0
+        var index = 0
+    
+        for layer1 in view.subviews {
+            for layer2 in layer1.subviews {
+                for element in layer2.subviews {
+                    if element is UIButton {
+                        let button = element as! UIButton
+                        var val = board[list] [index]
+                        button.setTitle(String(val), for: UIControl.State.normal)
+                        button.backgroundColor = UIColor.red
+                    }
+                    index = index + 1
+                }
+                list = list + 1
+            }
+        }
+         
+    }
+    
+    
+    func populateBoard() {
+        
+        var count = 0
+        var r = 0
+        
+        while (r < 9) {
+            let numbers = [1,2,3,4,5,6,7,8,9]
+            let c = 0
+            
+            while (c < 9) {
+                
+                
+                while (count < 20) {
+                    
+                    var val = numbers.randomElement()!
+                }
+            }
+            
         }
     }
     
