@@ -94,6 +94,22 @@ class ViewController: UIViewController {
          
     }
     
+    func in_square(x : Int, y : Int, val : Int) -> Bool {
+        
+        let r = Int(3 * floor(Float(x) / 3))
+        let c = Int(3 * floor(Float(y) / 3))
+        
+        for i in 1...3 {
+            for j in 1...3 {
+                if (board[r+i][c+j] == val){
+                    return true
+                }
+            }
+        }
+        
+        return false
+        
+    }
     
     func populateBoard() {
         
@@ -124,7 +140,7 @@ class ViewController: UIViewController {
                                board[6][c],board[7][c],board[8][c]]
                     
                     let in_col = col.contains(val)
-                    if (!in_col){
+                    if (!in_col && !in_square(x:r, y:c, val:val)){
                         board[r][c] = val
                         let index = numbers.firstIndex(of: val)
                         numbers.remove(at: index!)
