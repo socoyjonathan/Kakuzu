@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         print(board)
         populateBoard()
         print(board)
-        //fillBoard()
+        fillBoard()
         // Do any additional setup after loading the view.
     }
 
@@ -84,6 +84,8 @@ class ViewController: UIViewController {
                         let button = element as! UIButton
                         let val = board[list][index]
                         button.setTitle(String(val), for: UIControl.State.normal)
+                        button.setTitleColor(UIColor.black, for: UIControl.State.normal)
+                        button.setTitleColor(UIColor.black, for: UIControl.State.highlighted)
                     }
                     index = index + 1
                 }
@@ -120,7 +122,7 @@ class ViewController: UIViewController {
         var redo = false
         
         while (r < 9) {
-            print("\nrow: " + String(r))
+            print("row: " + String(r))
             
             var numbers = [1,2,3,4,5,6,7,8,9]
             var c = 0
@@ -156,10 +158,6 @@ class ViewController: UIViewController {
                     
                     let in_col = col.contains(val)
                     
-                    if (count == 0) {
-                        print(in_col)
-                        print(in_square(x:r, y:c, val:val))
-                    }
                     
                     if (!in_col && !in_square(x:r, y:c, val:val)){
                         board[r][c] = val
@@ -177,21 +175,17 @@ class ViewController: UIViewController {
                 if (count >= 20) {
                     count2 = count2 + 1
                     print("redo")
-                    //print(board[r])
                     board[r] = [0,0,0,0,0,0,0,0,0]
-                    //print(board[r - 1])
-                    //print(board[r])
                     r = r - 1
                     count = 0
                     redo = true
                     break
                 }
                 
-                print("count: " + String(count))
                 
                 count = 0
                 c = c + 1
-                print(board[r])
+                //print(board[r])
             }
             r = r + 1
             
