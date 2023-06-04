@@ -114,12 +114,14 @@ class ViewController: UIViewController {
     func populateBoard() {
         
         var count = 0
+        var count2 = 0
         var r = 0
         
         var redo = false
         
         while (r < 9) {
-            print(r)
+            print("\nrow: " + String(r))
+            
             var numbers = [1,2,3,4,5,6,7,8,9]
             var c = 0
             
@@ -127,31 +129,43 @@ class ViewController: UIViewController {
                 redo = false
             }
             
-            while (c < 9) {
-                
-                if (count >= 20) {
-                    print("count >= 20")
-                    print(r)
-                    board[r] = [0,0,0,0,0,0,0,0,0]
-                    //r = r - 1
-                    redo = true
-                }
-                
-                count = 0
+            if (count2 >= 20) {
+                print("count2 >= 20")
+                return
+            }
+            
+            
+            while (!redo && c < 9) {
+                print("col: " + String(c))
                 
                 
+
                 while (!redo && count < 20) {
+                    if (c == 8) {
+                        print(count)
+                    }
+                    
                     
                     let val = numbers.randomElement()!
+                    if (count == 0) {
+                        print(val)
+                    }
                     let col = [board[0][c],board[1][c],board[2][c],
                                board[3][c],board[4][c],board[5][c],
                                board[6][c],board[7][c],board[8][c]]
                     
                     let in_col = col.contains(val)
+                    
+                    if (count == 0) {
+                        print(in_col)
+                        print(in_square(x:r, y:c, val:val))
+                    }
+                    
                     if (!in_col && !in_square(x:r, y:c, val:val)){
                         board[r][c] = val
                         let index = numbers.firstIndex(of: val)
                         numbers.remove(at: index!)
+                        //print("value: " + String(val))
                         break
                         
                         
@@ -159,7 +173,25 @@ class ViewController: UIViewController {
                     count = count + 1
             
                 }
+                
+                if (count >= 20) {
+                    count2 = count2 + 1
+                    print("redo")
+                    //print(board[r])
+                    board[r] = [0,0,0,0,0,0,0,0,0]
+                    //print(board[r - 1])
+                    //print(board[r])
+                    r = r - 1
+                    count = 0
+                    redo = true
+                    break
+                }
+                
+                print("count: " + String(count))
+                
+                count = 0
                 c = c + 1
+                print(board[r])
             }
             r = r + 1
             
