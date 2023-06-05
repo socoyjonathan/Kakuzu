@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     // players scores
     var player1_score = 0
     var player2_score = 0
-
+    
     var num = 0
     var turn = 0
     
@@ -41,18 +41,23 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(board)
-        populateBoard()
-        fillBoard()
-        print(board)
+        //        print(board)
+        resetBoard()
+        //        print(board)
         
         // Do any additional setup after loading the view.
     }
     
+    func resetBoard(){
+        
+        print(board)
+        while(!populateBoard()){}
+        fillBoard() // puts global var values into buttons and covers buttons
+        print(board)
+    }
+    
     
     @IBAction func resetBoard(_ sender: UIButton) {
-        
-        
         
         board = [[0,0,0,0,0,0,0,0,0],
                  [0,0,0,0,0,0,0,0,0],
@@ -68,17 +73,11 @@ class ViewController: UIViewController {
         player2_score = 0
         
         fillBoard() // puts global var values into buttons and covers buttons
+        resetBoard()
         
-        print(board)
-        populateBoard() // regeneratest the sudoku board
-        fillBoard() // puts global var values into buttons and covers buttons
-        print(board)
         nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         
         newNumLabel.text = ""
-
-        
-        
     }
     
     
@@ -183,7 +182,7 @@ class ViewController: UIViewController {
 
 
     
-    func populateBoard() {
+    func populateBoard() -> Bool {
         
         var count = 0
         var count2 = 0
@@ -203,7 +202,7 @@ class ViewController: UIViewController {
             
             if (count2 >= 20) {
                 print("count2 >= 20")
-                return
+                return false
             }
             
             
@@ -260,6 +259,8 @@ class ViewController: UIViewController {
             r = r + 1
             
         }
+        
+        return true
     }
 
     
