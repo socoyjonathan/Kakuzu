@@ -261,6 +261,21 @@ class ViewController: UIViewController {
         
         return true
     }
+
+    
+    
+    
+    /*
+    makeBoard():
+    setTitle(eachTile):
+    
+    // dynamically set the button text to the number in the array at that position
+    //https://stackoverflow.com/questions/26326296/changing-text-of-uibutton-programmatically-swift
+    sender.setTitle(firstTile, for: UIControl.State.normal)
+    */
+    
+    // represent a multidimensional array in swift
+    // iterate through all onjects (buttons) in a View
     
 }
 
