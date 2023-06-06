@@ -54,10 +54,12 @@ class ViewController: UIViewController {
         while(!populateBoard()){}
         fillBoard() // puts global var values into buttons and covers buttons
         print(board)
+        
+        
     }
     
     
-    @IBAction func resetBoard(_ sender: UIButton) {
+    @IBAction func resetBoardClick(_ sender: UIButton) {
         
         board = [[0,0,0,0,0,0,0,0,0],
                  [0,0,0,0,0,0,0,0,0],
@@ -74,6 +76,8 @@ class ViewController: UIViewController {
         
         fillBoard() // puts global var values into buttons and covers buttons
         resetBoard()
+        
+        
         
         nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         
@@ -129,8 +133,16 @@ class ViewController: UIViewController {
     }
 
     
+    //return an array of 9 tuples to uncover
+    func pickUncover() -> Array<Array<Int>>{
+        
+        return [[1,2],[8,7]]
+    }
+    
     
     func fillBoard(){
+        
+        let uncover = pickUncover()
         
         var row = 0
         var index = 0
@@ -144,6 +156,10 @@ class ViewController: UIViewController {
                     if element is UIButton {
                         let button = element as! UIButton
                         button.backgroundColor = UIColor.black
+                        let coordinate = [row, index]
+                        if (uncover.contains(coordinate)) {
+                            button.backgroundColor = UIColor.white
+                        }
                         let val = board[row][index]
                         button.setTitle(String(val), for: UIControl.State.normal)
                         // https://stackoverflow.com/questions/31088172/how-to-set-the-title-text-color-of-uibutton
