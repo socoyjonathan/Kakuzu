@@ -27,9 +27,11 @@ class ViewController: UIViewController {
     
     // player labels and buttons
     @IBOutlet weak var player1: UILabel!
+    @IBOutlet weak var newNumber: UIButton!
     @IBOutlet weak var player2: UILabel!
     @IBOutlet weak var newNumLabel: UILabel!
     
+
     // players scores
     var player1_score = 0
     var player2_score = 0
@@ -41,18 +43,21 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        print(board)
         resetBoard()
-        //        print(board)
-        
-        // Do any additional setup after loading the view.
     }
     
     func resetBoard(){
         
         print(board)
         while(!populateBoard()){}
-        fillBoard() // puts global var values into buttons and covers buttons
+        
+        player1_score = 0
+        player2_score = 0
+        
+        player1.text = String(player1_score)
+        player2.text = String(player2_score)
+
+        fillBoard()
         print(board)
         
         
@@ -74,7 +79,12 @@ class ViewController: UIViewController {
         player1_score = 0
         player2_score = 0
         
-        fillBoard() // puts global var values into buttons and covers buttons
+        player1.text = String(player1_score)
+        player2.text = String(player2_score)
+//        player1.font = UIFont.boldSystemFont(ofSize: 20.0)
+//        player2.font = UIFont.boldSystemFont(ofSize: 20.0)
+
+        fillBoard()
         resetBoard()
         
         
@@ -82,24 +92,22 @@ class ViewController: UIViewController {
         nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         
         newNumLabel.text = ""
+        
     }
     
     
 
     
     @IBAction func newNumber(_ sender: UIButton) {
-        
         num = Int.random(in: 1..<10)
-        
         newNumLabel.text = String(num)
-
+        newNumLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+        sender.isEnabled = false
         
     }
 
 
-    
-    // buttons actions
-    //https://stackoverflow.com/questions/38534573/changing-opacity-of-button-when-clicked-xcode-swift
+    // button actions
     @IBAction func buttonClicked(_ sender: UIButton) {
         
         sender.backgroundColor = UIColor.white
@@ -109,21 +117,30 @@ class ViewController: UIViewController {
             
             if turn == 0 {
                 player1_score += 1
-                
             } else {
                 player2_score += 1
             }
             
             player1.text = String(player1_score)
             player2.text = String(player2_score)
-            
+            player1.font = UIFont.boldSystemFont(ofSize: 20.0)
+            player2.font = UIFont.boldSystemFont(ofSize: 20.0)
             
         } else {
             // delay by 1 second, then cover number if guess incorrect
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
                 sender.backgroundColor = UIColor.black
                 
+                self.newNumber.isEnabled = true
                 self.turn = (self.turn + 1) % 2
+                
+                if (self.turn == 0){
+                    self.player1.backgroundColor = UIColor.red
+                    self.player2.backgroundColor = UIColor.white
+                } else {
+                    self.player2.backgroundColor = UIColor.blue
+                    self.player1.backgroundColor = UIColor.white
+                }
         
                 // show turn to user
                 
@@ -138,6 +155,8 @@ class ViewController: UIViewController {
         
         return [[1,2],[8,7]]
     }
+    
+    
     
     
     func fillBoard(){
@@ -162,9 +181,8 @@ class ViewController: UIViewController {
                         }
                         let val = board[row][index]
                         button.setTitle(String(val), for: UIControl.State.normal)
-                        // https://stackoverflow.com/questions/31088172/how-to-set-the-title-text-color-of-uibutton
                         button.setTitleColor(UIColor.black, for: .normal)
-//                        button.setTitleColor(UIColor.black, for: .s)
+                        button.setTitleColor(UIColor.black, for: .selected)
                     }
                     index = index + 1
                 }
@@ -174,9 +192,6 @@ class ViewController: UIViewController {
         }
         
     }
-    
-    
-    
     
     func in_square(x : Int, y : Int, val : Int) -> Bool {
         
@@ -206,7 +221,6 @@ class ViewController: UIViewController {
         var redo = false
         
         while (r < 9) {
-//            print("row: " + String(r))
             
             var numbers = [1,2,3,4,5,6,7,8,9]
             var c = 0
@@ -222,20 +236,11 @@ class ViewController: UIViewController {
             
             
             while (!redo && c < 9) {
-//                print("col: " + String(c))
-                
-                
 
                 while (!redo && count < 20) {
-//                    if (c == 8) {
-//                        print(count)
-//                    }
-                    
-                    
+
                     let val = numbers.randomElement()!
-//                    if (count == 0) {
-//                        print(val)
-//                    }
+
                     let col = [board[0][c],board[1][c],board[2][c],
                                board[3][c],board[4][c],board[5][c],
                                board[6][c],board[7][c],board[8][c]]
@@ -247,7 +252,6 @@ class ViewController: UIViewController {
                         board[r][c] = val
                         let index = numbers.firstIndex(of: val)
                         numbers.remove(at: index!)
-                        //print("value: " + String(val))
                         break
                         
                         
@@ -258,7 +262,6 @@ class ViewController: UIViewController {
                 
                 if (count >= 20) {
                     count2 = count2 + 1
-//                    print("redo")
                     board[r] = [0,0,0,0,0,0,0,0,0]
                     r = r - 1
                     count = 0
@@ -266,13 +269,11 @@ class ViewController: UIViewController {
                     break
                 }
                 
-                
                 count = 0
                 c = c + 1
-                //print(board[r])
             }
-            r = r + 1
             
+            r = r + 1
         }
         
         return true

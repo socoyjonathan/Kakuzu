@@ -12,7 +12,7 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Kakuzu" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -52,6 +52,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="FFc-QR-pVO" secondAttribute="height" id="0HW-nA-Dck"/>
                                                 </constraints>
+                                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="9"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title=""/>
                                                 <connections>
@@ -1128,52 +1129,48 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z3f-Qw-lSd">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z3f-Qw-lSd">
                                 <rect key="frame" x="61" y="633" width="97" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3hy-Hz-IRJ">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3hy-Hz-IRJ">
                                 <rect key="frame" x="250" y="633" width="97" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nkl-bH-zJk">
-                                <rect key="frame" x="151" y="691" width="91" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nkl-bH-zJk">
+                                <rect key="frame" x="143" y="688" width="107" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="rhz-Ja-CZY"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title=""/>
+                                <buttonConfiguration key="configuration" style="filled" title="Generate"/>
                                 <connections>
                                     <action selector="newNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Al9-7l-LFj"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLU-FN-oiQ">
-                                <rect key="frame" x="250" y="89" width="108" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLU-FN-oiQ">
+                                <rect key="frame" x="250" y="89.666666666666671" width="109" height="34.333333333333329"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="New Game"/>
                                 <connections>
                                     <action selector="resetBoard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="erT-93-rFS"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Opg-KD-Bmm">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Opg-KD-Bmm">
                                 <rect key="frame" x="151" y="758" width="91" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 1 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KI5-gk-597">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KI5-gk-597">
                                 <rect key="frame" x="78" y="592" width="63" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zzk-pn-KXP">
-                                <rect key="frame" x="274" y="592" width="61" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zzk-pn-KXP">
+                                <rect key="frame" x="274" y="592.66666666666663" width="61" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1182,13 +1179,37 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3hy-Hz-IRJ" secondAttribute="trailing" constant="46" id="3fX-Gc-go5"/>
+                            <constraint firstItem="3hy-Hz-IRJ" firstAttribute="leading" secondItem="xLU-FN-oiQ" secondAttribute="leading" id="HZj-Xb-SCh"/>
+                            <constraint firstItem="Zbi-d5-85j" firstAttribute="top" secondItem="xLU-FN-oiQ" secondAttribute="bottom" constant="35" id="JRy-ey-xIp"/>
+                            <constraint firstItem="Opg-KD-Bmm" firstAttribute="centerX" secondItem="Nkl-bH-zJk" secondAttribute="centerX" id="JjM-T4-lAH"/>
+                            <constraint firstItem="Opg-KD-Bmm" firstAttribute="top" secondItem="Nkl-bH-zJk" secondAttribute="bottom" constant="23" id="Jn0-y6-wKL"/>
+                            <constraint firstItem="Zbi-d5-85j" firstAttribute="top" secondItem="xLU-FN-oiQ" secondAttribute="bottom" constant="35" id="Jo0-dW-ZfV"/>
                             <constraint firstItem="Zbi-d5-85j" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="Kxa-U5-KgE"/>
+                            <constraint firstItem="3hy-Hz-IRJ" firstAttribute="baseline" secondItem="Z3f-Qw-lSd" secondAttribute="firstBaseline" id="MJu-Ib-Awt"/>
+                            <constraint firstItem="Nkl-bH-zJk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="143" id="Oi0-vW-RnS"/>
+                            <constraint firstItem="Nkl-bH-zJk" firstAttribute="top" secondItem="Z3f-Qw-lSd" secondAttribute="bottom" constant="21" id="QFI-p3-fIb"/>
                             <constraint firstItem="Zbi-d5-85j" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RL5-WP-Kq5"/>
+                            <constraint firstItem="KI5-gk-597" firstAttribute="centerX" secondItem="Z3f-Qw-lSd" secondAttribute="centerX" id="X78-R4-mOK"/>
+                            <constraint firstItem="KI5-gk-597" firstAttribute="top" secondItem="Zbi-d5-85j" secondAttribute="bottom" constant="40" id="YvX-Gj-1NS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3hy-Hz-IRJ" secondAttribute="bottom" constant="151" id="ZY8-0t-VRg"/>
+                            <constraint firstItem="3hy-Hz-IRJ" firstAttribute="top" secondItem="zzk-pn-KXP" secondAttribute="bottom" constant="20" id="Zas-zX-Vp2"/>
+                            <constraint firstItem="Z3f-Qw-lSd" firstAttribute="top" secondItem="KI5-gk-597" secondAttribute="bottom" constant="20" id="Zzd-c1-g7p"/>
+                            <constraint firstItem="KI5-gk-597" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="78" id="bN3-LA-8UO"/>
+                            <constraint firstItem="xLU-FN-oiQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="250" id="dt1-ek-wZa"/>
+                            <constraint firstItem="xLU-FN-oiQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="250" id="hxc-Mu-K0X"/>
+                            <constraint firstItem="Opg-KD-Bmm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="151" id="jWc-Aq-1fH"/>
+                            <constraint firstItem="Nkl-bH-zJk" firstAttribute="centerX" secondItem="Zbi-d5-85j" secondAttribute="centerX" id="lvS-HX-jSd"/>
+                            <constraint firstItem="3hy-Hz-IRJ" firstAttribute="leading" secondItem="Z3f-Qw-lSd" secondAttribute="trailing" constant="92" id="m86-Jv-eSq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Zbi-d5-85j" secondAttribute="trailing" id="mZf-PI-SuP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zzk-pn-KXP" secondAttribute="trailing" constant="58" id="poV-S4-HS5"/>
+                            <constraint firstItem="zzk-pn-KXP" firstAttribute="centerX" secondItem="xLU-FN-oiQ" secondAttribute="centerX" id="xNB-Vf-g6g"/>
+                            <constraint firstItem="KI5-gk-597" firstAttribute="baseline" secondItem="zzk-pn-KXP" secondAttribute="baseline" id="zub-Tf-R5U"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="newNumLabel" destination="Opg-KD-Bmm" id="CRp-pr-Wb0"/>
+                        <outlet property="newNumber" destination="Nkl-bH-zJk" id="m9o-lv-Dkh"/>
                         <outlet property="player1" destination="Z3f-Qw-lSd" id="HmH-zr-er7"/>
                         <outlet property="player2" destination="3hy-Hz-IRJ" id="qSt-F1-kaQ"/>
                     </connections>
