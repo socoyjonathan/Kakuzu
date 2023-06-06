@@ -29,6 +29,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var player1: UILabel!
     @IBOutlet weak var player2: UILabel!
     @IBOutlet weak var newNumLabel: UILabel!
+
     
     // players scores
     var player1_score = 0
@@ -88,7 +89,7 @@ class ViewController: UIViewController {
         num = Int.random(in: 1..<10)
         
         newNumLabel.text = String(num)
-
+        newNumLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
         
     }
 
@@ -112,7 +113,8 @@ class ViewController: UIViewController {
             
             player1.text = String(player1_score)
             player2.text = String(player2_score)
-            
+            player1.font = UIFont.boldSystemFont(ofSize: 20.0)
+            player2.font = UIFont.boldSystemFont(ofSize: 20.0)
             
         } else {
             // delay by 1 second, then cover number if guess incorrect
