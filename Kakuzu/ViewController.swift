@@ -26,12 +26,13 @@ class ViewController: UIViewController {
     
     
     // player labels and buttons
-    @IBOutlet weak var player1: UILabel!
     @IBOutlet weak var newNumber: UIButton!
+    @IBOutlet weak var player1: UILabel!
     @IBOutlet weak var player2: UILabel!
     @IBOutlet weak var newNumLabel: UILabel!
     
-
+    
+    
     // players scores
     var player1_score = 0
     var player2_score = 0
@@ -39,7 +40,8 @@ class ViewController: UIViewController {
     var num = 0
     var turn = 0
     
-    var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    //var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    var numsDict:[Int:Int] = [1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,11 +55,19 @@ class ViewController: UIViewController {
         
         player1_score = 0
         player2_score = 0
+
+        fillBoard()
         
         player1.text = String(player1_score)
         player2.text = String(player2_score)
-
-        fillBoard()
+        player1.font = UIFont.boldSystemFont(ofSize: 15.0)
+        player2.font = UIFont.boldSystemFont(ofSize: 15.0)
+        
+        player1.layer.masksToBounds = true
+        player1.layer.cornerRadius = 5
+        player2.layer.masksToBounds = true
+        player2.layer.cornerRadius = 5
+        
         print(board)
     }
     
@@ -79,13 +89,14 @@ class ViewController: UIViewController {
         
         player1.text = String(player1_score)
         player2.text = String(player2_score)
-//        player1.font = UIFont.boldSystemFont(ofSize: 20.0)
-//        player2.font = UIFont.boldSystemFont(ofSize: 20.0)
+        player1.font = UIFont.boldSystemFont(ofSize: 15.0)
+        player2.font = UIFont.boldSystemFont(ofSize: 15.0)
 
         fillBoard()
         resetBoard()
         
-        nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        //nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        numsDict = [1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0]
         
         newNumLabel.text = ""
         
@@ -95,7 +106,8 @@ class ViewController: UIViewController {
 
     
     @IBAction func newNumber(_ sender: UIButton) {
-        num = Int.random(in: 1..<10)
+        //num = Int.random(in: 1..<10)
+        num = numsDict.keys.randomElement()!
         newNumLabel.text = String(num)
         newNumLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
         sender.isEnabled = false
@@ -103,13 +115,26 @@ class ViewController: UIViewController {
     }
 
 
+
     // button actions
     @IBAction func buttonClicked(_ sender: UIButton) {
         
         sender.backgroundColor = UIColor.white
         
+        //print(numsDict)
+        
         if (Int(String(sender.currentTitle!)) == num) {
             sender.backgroundColor = UIColor.white
+            let curr_value = numsDict[num] ?? 0
+            numsDict.updateValue(Int(curr_value + 1), forKey:num)
+            
+            print(numsDict)
+            if (numsDict[num] == 8){
+                numsDict.removeValue(forKey: num)
+                self.turn = (self.turn + 1) % 2
+                self.newNumber.isEnabled = true
+            }
+            
             
             if turn == 0 {
                 player1_score += 1
@@ -127,32 +152,46 @@ class ViewController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
                 sender.backgroundColor = UIColor.black
                 
-                self.newNumber.isEnabled = true
                 self.turn = (self.turn + 1) % 2
-                
-                if (self.turn == 0){
-                    self.player1.backgroundColor = UIColor.red
-                    self.player2.backgroundColor = UIColor.white
-                } else {
-                    self.player2.backgroundColor = UIColor.blue
-                    self.player1.backgroundColor = UIColor.white
-                }
-        
-                // show turn to user
-                
-                
+                self.newNumber.isEnabled = true
             }
+        }
+        
+        if (self.turn == 0){
+            self.player1.backgroundColor = UIColor.red
+            self.player2.backgroundColor = UIColor.white
+        } else {
+            self.player2.backgroundColor = UIColor.blue
+            self.player1.backgroundColor = UIColor.white
         }
     }
 
     
-    
-    
+    func pickUncovered() -> Array<Array<Int>> {
+        
+        
+        
+        var coords = [[Int]]()
+        
+        for i in 0...9 {
+            
+            let r = Int(3 * floor(Float(i) / 3))
+            let c = 3*(i % 3)
+            
+            let x = Int.random(in: 0...2)
+            let y = Int.random(in: 0...2)
+            
+            coords.append([r+x, c+y])
+        }
+
+        return coords
+    }
     
     func fillBoard(){
         
         var row = 0
         var index = 0
+        let coords = pickUncovered()
         
         
         // https://stackoverflow.com/questions/42629306/looping-through-uibuttons-in-uiview
@@ -163,6 +202,14 @@ class ViewController: UIViewController {
                     if element is UIButton {
                         let button = element as! UIButton
                         button.backgroundColor = UIColor.black
+                        if coords.contains([row, index]){
+                            let curr_num_on_board = board[row][index]
+                            let curr_value = numsDict[curr_num_on_board] ?? 0
+                            numsDict.updateValue(Int(curr_value + 1), forKey:curr_num_on_board)
+                            button.backgroundColor = UIColor.white
+                        }
+                        
+                        
                         let val = board[row][index]
                         button.setTitle(String(val), for: UIControl.State.normal)
                         button.setTitleColor(UIColor.black, for: .normal)
@@ -224,6 +271,7 @@ class ViewController: UIViewController {
                 while (!redo && count < 20) {
 
                     let val = numbers.randomElement()!
+                    
 
                     let col = [board[0][c],board[1][c],board[2][c],
                                board[3][c],board[4][c],board[5][c],
