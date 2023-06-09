@@ -53,6 +53,8 @@ class ViewController: UIViewController {
     func resetBoard(){
         
         print(board)
+        
+        //create the sudoku board and flip 9 tiles
         while(!populateBoard()){}
         
         player1_score = 0
@@ -60,6 +62,7 @@ class ViewController: UIViewController {
 
         fillBoard()
         
+        //reset player scores
         player1.text = String(player1_score)
         player2.text = String(player2_score)
         player1.font = UIFont.boldSystemFont(ofSize: 15.0)
@@ -69,6 +72,15 @@ class ViewController: UIViewController {
         player1.layer.cornerRadius = 5
         player2.layer.masksToBounds = true
         player2.layer.cornerRadius = 5
+        
+        self.player1.backgroundColor = UIColor.white
+        self.player2.backgroundColor = UIColor.white
+        
+        
+        //reset generate button
+        newNumLabel.text = ""
+        self.newNumber.isEnabled = true
+        
         
         print(board)
     }
@@ -88,11 +100,6 @@ class ViewController: UIViewController {
 
         player1_score = 0
         player2_score = 0
-        
-        player1.text = String(player1_score)
-        player2.text = String(player2_score)
-        player1.font = UIFont.boldSystemFont(ofSize: 15.0)
-        player2.font = UIFont.boldSystemFont(ofSize: 15.0)
 
         fillBoard()
         resetBoard()
@@ -100,7 +107,6 @@ class ViewController: UIViewController {
         //nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         numsDict = [1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0]
         
-        newNumLabel.text = ""
         
     }
     
@@ -215,11 +221,15 @@ class ViewController: UIViewController {
                             button.isEnabled = false
                             button.setTitleColor(UIColor.black, for: .disabled)
                         }
+                        else {
+                            button.isEnabled = true
+                        }
                         
                         
                         let val = board[row][index]
                         button.setTitle(String(val), for: UIControl.State.normal)
                         button.setTitleColor(UIColor.black, for: .normal)
+                        button.setTitleColor(UIColor.black, for: .highlighted)
                         button.setTitleColor(UIColor.black, for: .selected)
                     }
                     index = index + 1
