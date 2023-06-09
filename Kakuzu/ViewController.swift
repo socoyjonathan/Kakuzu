@@ -127,6 +127,9 @@ class ViewController: UIViewController {
         
         if (Int(String(sender.currentTitle!)) == num) {
             sender.backgroundColor = UIColor.white
+            sender.isEnabled = false
+            sender.setTitleColor(UIColor.black, for: .disabled)
+            
             let curr_value = numsDict[num] ?? 0
             numsDict.updateValue(Int(curr_value + 1), forKey:num)
             
@@ -135,6 +138,7 @@ class ViewController: UIViewController {
                 numsDict.removeValue(forKey: num)
                 self.turn = (self.turn + 1) % 2
                 self.newNumber.isEnabled = true
+                
             }
             
             
@@ -161,9 +165,11 @@ class ViewController: UIViewController {
         
         if (self.turn == 0){
             self.player1.backgroundColor = UIColor.red
+//            UIColor(red: 238.0/255.0, green: 221.0/255.0, blue: 130.0/255.0, alpha: 0.0)
             self.player2.backgroundColor = UIColor.white
         } else {
             self.player2.backgroundColor = UIColor.blue
+//            UIColor(red: 0.6, green: 0.3, blue: 0.1, alpha: 0.5)
             self.player1.backgroundColor = UIColor.white
         }
     }
@@ -195,9 +201,6 @@ class ViewController: UIViewController {
         var index = 0
         let coords = pickUncovered()
         
-        
-        // https://stackoverflow.com/questions/42629306/looping-through-uibuttons-in-uiview
-        // https://stackoverflow.com/questions/43493830/how-can-i-get-all-buttons-from-a-view
         for layer1 in view.subviews{
             for layer2 in layer1.subviews {
                 for element in layer2.subviews{
@@ -209,6 +212,8 @@ class ViewController: UIViewController {
                             let curr_value = numsDict[curr_num_on_board] ?? 0
                             numsDict.updateValue(Int(curr_value + 1), forKey:curr_num_on_board)
                             button.backgroundColor = UIColor.white
+                            button.isEnabled = false
+                            button.setTitleColor(UIColor.black, for: .disabled)
                         }
                         
                         
